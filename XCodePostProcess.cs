@@ -82,6 +82,14 @@ public static class XCodePostProcess
         project.overwriteBuildSetting("GCC_ENABLE_CPP_RTTI", "YES", "Release");
         project.overwriteBuildSetting("GCC_ENABLE_CPP_RTTI", "YES", "Debug");
 
+
+#if AUDIT
+        project.overwriteBuildSetting("PRODUCT_BUNDLE_IDENTIFIER", "com.zeus.awesome.krly");
+        project.overwriteBuildSetting("PRODUCT_NAME","krly");
+#elif NORMAL
+        project.overwriteBuildSetting("PRODUCT_BUNDLE_IDENTIFIER","com.tianshen.shuguang.tgame");
+        project.overwriteBuildSetting("PRODUCT_NAME", "krly");
+#endif
         //TODO implement generic settings as a module option
         //		project.overwriteBuildSetting("CODE_SIGN_IDENTITY[sdk=iphoneos*]", "iPhone Distribution", "Release");
 
@@ -93,13 +101,6 @@ public static class XCodePostProcess
         var targetAttrs = (PBXDictionary)attrs["TargetAttributes"];
         PBXDictionary targetSetting = new PBXDictionary();
         targetSetting["ProvisioningStyle"] = "Manual";
-#if AUDIT
-        targetSetting["PRODUCT_BUNDLE_IDENTIFIER"] = "com.zeus.awesome.krly";
-        targetSetting["PRODUCT_NAME"] = "krly";
-#elif NORMAL
-        targetSetting["PRODUCT_BUNDLE_IDENTIFIER"] = "com.tianshen.shuguang.tgame";
-        targetSetting["PRODUCT_NAME"] = "krly";
-#endif
 
 
         var targets = pbxproj.targets;
